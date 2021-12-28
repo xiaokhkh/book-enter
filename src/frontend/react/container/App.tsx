@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { addContextListeners, removeContextListeners } from '../store/thunks/context.thunk';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useRef } from 'react';
+
 import Event from '../../../common/class/Event';
 import { RootState } from '../store/rootReducer';
-import { addContextListeners, removeContextListeners } from '../store/thunks/context.thunk';
 
 const tabContextMenu = (event: MouseEvent): void => {
   Event.TAB_CTX_MENU.send({ context: 'World', x: event.x, y: event.y });
@@ -16,7 +17,6 @@ const App = (): JSX.Element => {
   useEffect(() => {
     console.log("Call add context listeners");
     dispatch(addContextListeners());
-
     return () => {
       dispatch(removeContextListeners());
     };
